@@ -14,7 +14,7 @@ RUN apt-get update && \
 RUN dpkg --add-architecture i386 && apt-get update && apt-get install -y --force-yes expect git wget libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z1 python curl libqt5widgets5 && apt-get clean && rm -fr /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install Android SDK
-ENV VERSION_SDK_TOOLS=3952940 \
+ENV VERSION_SDK_TOOLS=4333796 \
 	  ANDROID_HOME=/usr/local/android-sdk-linux
 ENV	PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
 RUN apt-get update && apt-get install unzip && \
@@ -24,11 +24,18 @@ RUN apt-get update && apt-get install unzip && \
     unzip sdk.zip -d $ANDROID_HOME && \
     rm -f sdk.zip
 RUN echo $ANDROID_HOME
-ADD packages.txt $ANDROID_HOME
 RUN mkdir -p /root/.android && \
-    touch /root/.android/repositories.cfg && \
-    sdkmanager --update && yes | sdkmanager --licenses && \
-    sdkmanager --package_file=$ANDROID_HOME/packages.txt
+    touch /root/.android/repositories.cfg
+    
+RUN yes | sdkmanager --licenses && sdkmanager --update
+
+RUN yes | sdkmanager \
+  "tools" \
+  "platform-tools" \
+  "build-tools;28.0.3" \
+  "extras;android;m2repository" \
+  "platforms;android-28" \
+  "extras;google;m2repository"
 
 # Setup environment variables
 ENV JAVA8_HOME /usr/lib/jvm/java-8-oracle

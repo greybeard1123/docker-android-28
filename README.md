@@ -8,7 +8,7 @@ A minimal android [Docker](https://www.docker.com/) image based on Ubuntu Linux
 
 - Ubuntu ( **16.04** )
 - Oracle Java 8
-- Android platform tools ( **3952940** )
+- Android platform tools ( **4333796** )
 - Android SDK ( **API 28** )
 - Android SDK Build-Tools ( **28.0.3** )
 - Google Repository ( **latest** )

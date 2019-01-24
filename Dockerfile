@@ -14,7 +14,7 @@ RUN apt-get update && \
 RUN dpkg --add-architecture i386 && apt-get update && apt-get install -y --force-yes expect git wget libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z1 python curl libqt5widgets5 && apt-get clean && rm -fr /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install Android SDK
-ENV VERSION_SDK_TOOLS=4333796 \
+ENV VERSION_SDK_TOOLS=3952940 \
 	  ANDROID_HOME=/usr/local/android-sdk-linux
 ENV	PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
 RUN apt-get update && apt-get install unzip && \
